@@ -34,8 +34,6 @@ typedef struct {
 
 typedef int (*CompareFunc)(Student*, Student*);
 
-// Implement the following functions:
-
 Database* initDatabase();
 void addStudent(Database* db, Student* student);
 Student* createStudent(char* name, char* id, double gpa, int creditHours);
@@ -164,41 +162,6 @@ void addStudent(Database* db, Student* student) {
         db->pSeniorList = sortedInsert(db->pSeniorList, newNode, compareByName);
     }
 }
-
-
-// void addStudent(Database* db, Student* student) {
-//     StudentNode* newNode = createStudentNode(student);
-
-//     // add student to ID list, sorted by ID
-//     db->pIDList = sortedInsert(db->pIDList, newNode, compareByID);
-
-//     // add student to honor roll list, if their GPA is 3.5 or higher
-//     if (student->gpa >= 3.5) {
-//         newNode = createStudentNode(student);
-//         db->pHonorRollList = sortedInsert(db->pHonorRollList, newNode, compareByGPA);
-//     }
-
-//     // add student to the academic probation list, if GPA is below 2.0
-//     if (student->gpa < 2.0) {
-//         newNode = createStudentNode(student);
-//         db->pAcademicProbationList = sortedInsert(db->pAcademicProbationList, newNode, compareByGPA);
-//     }
-
-//     // add student to the appropriate class list, sorted by name based on credit hours
-//     newNode = createStudentNode(student);
-//     if (student->creditHours < 30) {
-//         db->pFreshmanList = sortedInsert(db->pFreshmanList, newNode, compareByName);
-//     } 
-// 	else if (student->creditHours < 60) {
-//         db->pSophomoreList = sortedInsert(db->pSophomoreList, newNode, compareByName);
-//     } 
-// 	else if (student->creditHours < 90) {
-//         db->pJuniorList = sortedInsert(db->pJuniorList, newNode, compareByName);
-//     } 
-// 	else {
-//         db->pSeniorList = sortedInsert(db->pSeniorList, newNode, compareByName);
-//     }
-// }
 
 //typedef int (*CompareFunc)(Student*, Student*);
 
@@ -358,37 +321,6 @@ void deleteStudent(Database* db,  char* id) {
   }
 }
 
-// // deletes a student with the inputed ID from database
-// void deleteStudent(Database* db, char* id) {
-//     StudentNode* prev = NULL;
-//     StudentNode* current = db->pIDList;
-//     // loop thru list to find student with given ID
-//     while (current != NULL) {
-
-//         // if student found, remove student
-//         if (strcmp(current->pStudent->id, id) == 0) {
-//             if (prev != NULL) {
-//                 prev->pNext = current->pNext;
-//             } 
-//             else {
-//                 db->pIDList = current->pNext;
-//             }
-
-//             // free memory allocated for student and list node
-//             free(current->pStudent->name);
-//             free(current->pStudent->id);
-//             free(current->pStudent);
-//             free(current);
-//             return;
-//         }
-
-//         prev = current;
-//         current = current->pNext;
-//     }
-
-//     printf("Sorry, there is no student in the database with the id %s.\n", id);
-// }
-
 // free memory allocated for given list of students
 void freeList(StudentNode* list) {
     // loop thru list and free memory for wach student & node
@@ -460,40 +392,6 @@ void displayStudent(StudentNode* studentNode) {
     printf("    GPA - %.2f\n", student->gpa);
     printf("    Credit Hours - %d\n", student->creditHours);
 }
-
-
-// void displayStudent(Student* student) {
-//     if (student == NULL) {
-//         printf("There are no students matching that criteria.\n");
-//         return;
-//     }
-
-//     if (student->name == NULL || student->id == NULL) {
-//         printf("Invalid student data.\n");
-//         return;
-//     }
-
-//     printf("%s: \n", student->name);
-//     printf("	ID - %s\n", student->id);
-//     printf("	GPA - %.2f\n", student->gpa);
-//     printf("	Credit Hours - %d\n", student->creditHours);
-// }
-
-
-// display info for a single student
-// void displayStudent(Student* student) {
-//     // check if student is null
-//     if (student == NULL) {
-//         printf("There are no students matching that criteria.\n");
-//         return;
-//     }
-    
-//     // print student info
-//     printf("%s: \n", student->name);
-//     printf("	ID - %s\n", student->id);
-//     printf("	GPA - %.2f\n", student->gpa);
-//     printf("	Credit Hours - %d\n", student->creditHours);
-// }
 
 // create new student from user input
 Student* createStudentFromInput() {
@@ -736,8 +634,6 @@ void displayJuniors(Database* db) {
         printf("There are no students matching that criteria.\n");
     }
 }
-
-
 
 // diplays all senior students, sorted by name
 void displaySeniors(Database* db) {
